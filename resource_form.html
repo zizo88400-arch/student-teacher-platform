@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block title %}إضافة محتوى{% endblock %}{% block content %}
+<div class="form-card"><h2 class="mb-4">إضافة محتوى تعليمي</h2><form method="post" enctype="multipart/form-data">{{ form.hidden_tag() }}
+{% for field in [form.title, form.description, form.grade, form.subject, form.resource_type, form.url, form.file] %}
+<div class="mb-3">{{ field.label }}{% if field.name in ['grade','resource_type'] %}{{ field(class="form-select") }}{% elif field.name == 'description' %}{{ field(class="form-control", rows="3") }}{% elif field.name == 'file' %}{{ field(class="form-control") }}{% else %}{{ field(class="form-control") }}{% endif %}</div>{% endfor %}
+<div class="alert alert-info small">الملفات المسموحة: PDF وWord وPowerPoint والصور، بحد أقصى 20 ميجابايت.</div>{{ form.submit(class="btn btn-primary w-100") }}</form></div>{% endblock %}

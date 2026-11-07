@@ -1,0 +1,21 @@
+{% extends "base.html" %}{% block title %}الرئيسية | منصتي التعليمية{% endblock %}
+{% block content %}
+<section class="hero p-5 rounded-4 mb-4">
+ <span class="badge bg-light text-primary mb-3">تعليم منظم في مكان واحد</span>
+ <h1 class="display-5 fw-bold">منصة تجمع الطالب والمعلم</h1>
+ <p class="lead">فيديوهات شرح، مذكرات وكتب، روابط تعليمية، وأخبار تهم المجتمع التعليمي.</p>
+ <a class="btn btn-light btn-lg" href="{{ url_for('register') }}">ابدأ وأنشئ حسابك</a>
+ <a class="btn btn-outline-light btn-lg" href="{{ url_for('login') }}">تسجيل الدخول</a>
+</section>
+<div class="row g-3 mb-4">
+ {% for title, desc, icon in [('محتوى حسب صفك','اختار صفك وشوف مواده وملفاته','🎓'),('مساحة للمعلم','شارك مذكراتك وفيديوهاتك مع الطلاب','🧑‍🏫'),('أخبار وروابط','تابع الأخبار والمواقع التعليمية','📰')] %}
+ <div class="col-md-4"><div class="card h-100 p-3"><div class="fs-2">{{ icon }}</div><h5>{{ title }}</h5><p class="text-muted mb-0">{{ desc }}</p></div></div>
+ {% endfor %}
+</div>
+<div class="row g-4">
+ <div class="col-lg-8"><h3 class="mb-3">آخر الأخبار</h3>
+ {% for item in news %}<div class="card p-3 mb-2"><h5>{{ item.title }}</h5><p class="mb-1">{{ item.body }}</p>{% if item.source_url %}<a href="{{ item.source_url }}" target="_blank" rel="noopener">المصدر</a>{% endif %}<small class="text-muted">{{ item.created_at.strftime('%Y-%m-%d') }}</small></div>{% else %}<p class="text-muted">لا توجد أخبار منشورة حاليًا.</p>{% endfor %}
+ </div>
+ <div class="col-lg-4"><h3 class="mb-3">روابط مفيدة</h3>{% for link in links %}<div class="card p-3 mb-2"><a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.title }}</a><small>{{ link.description or '' }}</small></div>{% else %}<p class="text-muted">ستظهر الروابط هنا بعد إضافتها من الإدارة.</p>{% endfor %}</div>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% block title %}مساحة الطالب{% endblock %}{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center mb-4"><div><h2>أهلاً {{ current_user.name }} 👋</h2><p class="text-muted">الصف: {{ current_user.grade }}</p></div><span class="badge bg-primary fs-6">حساب طالب</span></div>
+<h3>المحتوى الخاص بصفك</h3><div class="row g-3 mb-5">
+{% for r in resources %}<div class="col-md-6"><div class="card p-3 h-100"><span class="badge bg-info text-dark align-self-start">{{ r.subject }} · {{ r.resource_type }}</span><h5 class="mt-2">{{ r.title }}</h5><p class="text-muted">{{ r.description or '' }}</p>
+{% if r.resource_type == 'youtube' %}{% set embed = r.url %}<a class="btn btn-outline-primary mt-auto" href="{{ r.url }}" target="_blank" rel="noopener">شاهد الفيديو على يوتيوب ↗</a>
+{% elif r.resource_type == 'file' %}<a class="btn btn-primary mt-auto" href="{{ url_for('uploaded_file', filename=r.filename) }}">تحميل الملف</a>
+{% else %}<a class="btn btn-outline-primary mt-auto" href="{{ r.url }}" target="_blank" rel="noopener">فتح الرابط ↗</a>{% endif %}</div></div>
+{% else %}<p class="text-muted">لسه مفيش محتوى مضاف لصفك. ارجع تاني بعد ما المعلمين ينشروا المحتوى.</p>{% endfor %}
+</div>
+<div class="row g-4"><div class="col-lg-7"><h3>أخبار تعليمية</h3>{% for n in news %}<div class="card p-3 mb-2"><h5>{{ n.title }}</h5><p>{{ n.body }}</p>{% if n.source_url %}<a href="{{ n.source_url }}" target="_blank" rel="noopener">المصدر</a>{% endif %}</div>{% else %}<p class="text-muted">لا توجد أخبار.</p>{% endfor %}</div>
+<div class="col-lg-5"><h3>منصات وروابط</h3>{% for l in links %}<div class="card p-3 mb-2"><a href="{{ l.url }}" target="_blank" rel="noopener">{{ l.title }} ↗</a><small>{{ l.description or '' }}</small></div>{% else %}<p class="text-muted">لا توجد روابط مضافة.</p>{% endfor %}</div></div>
+{% endblock %}

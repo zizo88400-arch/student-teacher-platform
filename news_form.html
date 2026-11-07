@@ -1,0 +1,1 @@
+{% extends "base.html" %}{% block content %}<div class="form-card"><h2>نشر خبر</h2><form method="post">{{ form.hidden_tag() }}{% for f in [form.title,form.body,form.source_url] %}<div class="mb-3">{{ f.label }}{{ f(class="form-control", rows="4") }}</div>{% endfor %}{{ form.submit(class="btn btn-primary") }}</form></div>{% endblock %}

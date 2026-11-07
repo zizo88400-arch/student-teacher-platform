@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block title %}إنشاء حساب{% endblock %}{% block content %}
+<div class="form-card"><h2 class="mb-4">إنشاء حساب جديد</h2><form method="post">{{ form.hidden_tag() }}
+{% for field in [form.name, form.email, form.password, form.confirm, form.role, form.grade, form.subject] %}
+<div class="mb-3 field-{{ field.name }}">{{ field.label }}{% if field.name in ['role','grade'] %}{{ field(class="form-select") }}{% else %}{{ field(class="form-control") }}{% endif %}
+{% for error in field.errors %}<div class="text-danger small">{{ error }}</div>{% endfor %}</div>{% endfor %}
+{{ form.submit(class="btn btn-primary w-100") }}</form></div>
+<script>
+function toggleFields(){let role=document.getElementById('role').value;document.querySelector('.field-grade').style.display=role==='student'?'block':'none';document.querySelector('.field-subject').style.display=role==='teacher'?'block':'none';}
+document.getElementById('role').addEventListener('change',toggleFields);toggleFields();
+</script>{% endblock %}

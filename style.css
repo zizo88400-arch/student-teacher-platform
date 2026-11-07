@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+body{font-family:'Cairo',sans-serif;background:#f4f7fb;color:#17243a;min-height:100vh}
+.navbar{background:#102b50}.navbar-brand{letter-spacing:.2px}
+.hero{background:linear-gradient(125deg,#102b50,#176b87);color:#fff}
+.card,.form-card{border:0;border-radius:16px;box-shadow:0 5px 22px rgba(16,43,80,.07)}
+.form-card{background:#fff;max-width:620px;margin:20px auto;padding:28px}
+.form-control,.form-select{padding:11px;border-radius:10px}
+.btn{border-radius:10px;padding:10px 18px}
+.btn-primary{background:#176b87;border-color:#176b87}
+.btn-primary:hover{background:#102b50;border-color:#102b50}
+footer{color:#718096}

@@ -1,0 +1,7 @@
+{% extends "base.html" %}{% block title %}إدارة المنصة{% endblock %}{% block content %}
+<h2 class="mb-3">لوحة إدارة المنصة</h2><div class="d-flex gap-2 flex-wrap mb-4"><a class="btn btn-primary" href="{{ url_for('new_news') }}">＋ نشر خبر</a><a class="btn btn-outline-primary" href="{{ url_for('new_link') }}">＋ إضافة رابط</a></div>
+<h4>الحسابات ({{ users|length }})</h4><div class="table-responsive mb-4"><table class="table table-striped"><thead><tr><th>الاسم</th><th>البريد</th><th>النوع</th><th>الصف / المادة</th></tr></thead><tbody>{% for u in users %}<tr><td>{{ u.name }}</td><td>{{ u.email }}</td><td>{{ u.role }}</td><td>{{ u.grade or u.subject or '-' }}</td></tr>{% endfor %}</tbody></table></div>
+<h4>آخر المحتويات</h4><div class="table-responsive mb-4"><table class="table"><thead><tr><th>العنوان</th><th>الصف</th><th>النوع</th></tr></thead><tbody>{% for r in resources %}<tr><td>{{ r.title }}</td><td>{{ r.grade }}</td><td>{{ r.resource_type }}</td></tr>{% endfor %}</tbody></table></div>
+<h4>الأخبار</h4>{% for n in news %}<div class="card p-3 mb-2"><b>{{ n.title }}</b><p class="mb-0">{{ n.body }}</p></div>{% else %}<p>لا توجد أخبار بعد.</p>{% endfor %}
+<h4 class="mt-4">الروابط</h4>{% for l in links %}<div class="card p-3 mb-2">{{ l.title }} — {{ l.audience }} — <a href="{{ l.url }}" target="_blank" rel="noopener">فتح</a></div>{% else %}<p>لا توجد روابط.</p>{% endfor %}
+{% endblock %}
